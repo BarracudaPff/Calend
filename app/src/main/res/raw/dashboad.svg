@@ -1,0 +1,7 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="24" height="24" rx="7" fill="#C4C4C4"/>
+    <rect width="2" height="24" transform="translate(7)" fill="#F4F4F4"/>
+    <rect width="2" height="24" transform="translate(24 7) rotate(90)" fill="#F4F4F4"/>
+    <rect width="2" height="24" transform="translate(24 17) rotate(90)" fill="#F4F4F4"/>
+    <rect width="2" height="24" transform="translate(17)" fill="#F4F4F4"/>
+</svg>

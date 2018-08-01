@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.andoidsrc.popupmenu.MainActivity" >
+
+    <item
+        android:id="@+id/lang_java"
+        android:title="Java"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/lang_android"
+        android:title="Android"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/lang_ruby"
+        android:title="Ruby"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+    <item
+        android:id="@+id/lang_python"
+        android:title="Python"
+        android:visible="true"
+        app:showAsAction="ifRoom|withText" />
+</menu>
