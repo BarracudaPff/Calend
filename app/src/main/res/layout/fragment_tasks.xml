@@ -3,17 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AccountFragment">
+    tools:context=".fragments.TasksFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <barracudapff.com.androidtestbar.list.AnimatedExpandableListView
+        android:id="@+id/exListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello account fragment" />
-
-    <ListView
-        android:id="@+id/mainMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
+        android:divider="@drawable/divider"
+        android:dividerHeight="7dp"
+        android:childDivider="@drawable/divider_child"
+        android:groupIndicator="@null" />
 </FrameLayout>

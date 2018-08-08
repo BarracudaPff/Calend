@@ -9,6 +9,8 @@
     <color name="colorWhiteTransparent">#80000000</color>
 
     <color name="newC">#b1b1b1</color>
+    <color name="selected">#7F7F7F</color>
 
     <color name="groupHeader">#F3F3F3</color>
+    <color name="groupChoose">#67C7E5</color>
 </resources>

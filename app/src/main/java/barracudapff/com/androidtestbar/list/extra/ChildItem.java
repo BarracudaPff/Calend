@@ -24,6 +24,7 @@ public class ChildItem {
         isDescr = description != null;
     }
 
+    public boolean COUNT = false;
     public String subject;
     public boolean isFav;
     public Integer star;

@@ -7,16 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,18 +21,22 @@ import barracudapff.com.androidtestbar.R;
 import barracudapff.com.androidtestbar.list.AnimatedExpandableListView;
 import barracudapff.com.androidtestbar.list.ExpListAdapter;
 import barracudapff.com.androidtestbar.list.extra.ChildItem;
-import barracudapff.com.androidtestbar.list.extra.DataChild;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements ActionSheet.ActionSheetListener {
+public class TasksFragment extends Fragment implements ActionSheet.ActionSheetListener {
 
     private AnimatedExpandableListView listView;
-    private ExpandableListAdapter adapter;
+    private ExpListAdapter adapter;
+    ArrayList<ArrayList<ChildItem>> groups = setData();
+    ArrayList<String> names = new ArrayList<>();
 
-    public HomeFragment() {
+    static private int i;
+    static private int j;
+
+    public TasksFragment() {
         // Required empty public constructor
     }
 
@@ -44,13 +45,14 @@ public class HomeFragment extends Fragment implements ActionSheet.ActionSheetLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return setList(inflater.inflate(R.layout.fragment_home, container, false));
+
+        return setList(inflater.inflate(R.layout.fragment_tasks, container, false));
     }
 
     private View setList(View view) {
         // Находим наш list
-        ArrayList<ArrayList<ChildItem>> groups = setData();
-        ArrayList<String> names = new ArrayList<>();
+        groups = setData();
+        names = new ArrayList<>();
         names.add("23 сентября, понедельник");
         names.add("24 сентября, вторник");
         names.add("26 сентября, четверг");
@@ -72,12 +74,19 @@ public class HomeFragment extends Fragment implements ActionSheet.ActionSheetLis
             }
 
         });
-        System.out.println("Only");
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 if (ExpandableListView.getPackedPositionType(id) == ExpandableListView.PACKED_POSITION_TYPE_CHILD) {
+                    System.out.println(id + " " + position);
+
+                    ExpandableListView listView = (ExpandableListView) parent;
+                    long pos = listView.getExpandableListPosition(position);
+
+                    // get type and correct positions
+                    i = ExpandableListView.getPackedPositionGroup(pos);
+                    j = ExpandableListView.getPackedPositionChild(pos);
                     showActionSheet();
                     return true;
                 }
@@ -98,18 +107,18 @@ public class HomeFragment extends Fragment implements ActionSheet.ActionSheetLis
         groups.add(children1);
         children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:50", "Коровкин", 1,
                 "текст задания текст задания текст задания текст задания текст задания текст задания текст задания ..."));
-        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:50", "Коровкин", 1,
+        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:51", "Коровкин", 1,
                 "текст задания текст задания текст задания текст задания текст задания текст задания текст задания ..."));
-        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:50", "Коровкин", 1,
+        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:52", "Коровкин", 1,
                 "текст задания текст задания текст задания текст задания текст задания текст задания текст задания ..."));
-        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:50", "Коровкин", 1,
+        children2.add(new ChildItem("Практика ЭВМ", false, "11:15-12:53", "Коровкин", 1,
                 "текст задания текст задания текст задания текст задания текст задания текст задания текст задания ..."));
         groups.add(children2);
         children3.add(new ChildItem("БДСТ", true, "9:30-11:15", "Малинин", 2,
                 null));
-        children3.add(new ChildItem("БДСТ", true, "9:30-11:15", "Малинин", 2,
+        children3.add(new ChildItem("БДСТ", true, "9:30-11:16", "Малинин", 2,
                 null));
-        children3.add(new ChildItem("БДСТ", true, "9:30-11:15", "Малинин", 2,
+        children3.add(new ChildItem("БДСТ", true, "9:30-11:17", "Малинин", 2,
                 null));
         groups.add(children3);
 
@@ -118,20 +127,32 @@ public class HomeFragment extends Fragment implements ActionSheet.ActionSheetLis
 
     public void showActionSheet() {
         ActionSheet.createBuilder(getContext(), getFragmentManager())
-                .setCancelButtonTitle("Cancel")
-                .setOtherButtonTitles("Item1", "Item2", "Item3", "Item4")
+                .setCancelButtonTitle("Отмена")
+                .setOtherButtonTitles("Отметить как важное", "Архивировать", "Удалить")
                 .setCancelableOnTouchOutside(true).setListener(this).show();
     }
 
     @Override
     public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
-        Toast.makeText(getContext().getApplicationContext(), "dismissed isCancle = " + isCancel, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onOtherButtonClick(ActionSheet actionSheet, int index) {
-        Toast.makeText(getContext().getApplicationContext(), "click item index = " + index,
-                Toast.LENGTH_SHORT).show();
+        switch (index) {
+            case 0:
+                groups.get(i).get(j).isFav = true;
+                break;
+            // TODO: 01.08.2018 archive button
+            case 1:
+                Toast toast = Toast.makeText(getContext(),
+                        "TODO", Toast.LENGTH_SHORT);
+                toast.show();
+                break;
+            case 2:
+                adapter.getGroup(i).remove(j);
+                break;
+        }
+        adapter.notifyDataSetChanged();
     }
 
     private static class GroupItem {

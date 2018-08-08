@@ -7,6 +7,19 @@
     tools:context=".MainActivity">
 
     <!--Задачи-->
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="9dp"
+        android:background="@null"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:orientation="horizontal">
+
+    </Spinner>
     <FrameLayout
         android:id="@+id/top_bar_frame"
         android:layout_width="match_parent"
@@ -28,8 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
-
-            <TextView
+            <!--TODO-->
+            <!--<TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -40,7 +53,7 @@
                 android:id="@+id/button3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_arrow_down_black_24dp" />
+                app:srcCompat="@drawable/ic_arrow_down_black_24dp" />-->
         </LinearLayout>
 
         <ImageView
@@ -66,21 +79,24 @@
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textTasks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:padding="2dp"
             android:gravity="center"
+            android:background="@drawable/layout_bg"
             android:text="Текущие задания"
             android:textAppearance="@style/top_menu" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textCalend"
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:padding="2dp"
             android:gravity="center"
             android:text="Календарь"
             android:textAppearance="@style/top_menu"
@@ -93,10 +109,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
         android:layout_below="@+id/top_menu_frame"
         android:layout_above="@+id/main_main">
 
     </FrameLayout>
+
 
     <LinearLayout
         android:id="@+id/main_main"
@@ -122,11 +140,12 @@
 
     <ImageView
         android:id="@+id/vector_image_view"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="64dp"
+        android:layout_height="73dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="6dp"
+        android:visibility="gone"
         app:srcCompat="@drawable/ic_add" />
 
 </RelativeLayout>

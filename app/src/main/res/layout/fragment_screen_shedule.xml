@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".fragments.ScreenSheduleFragment">
 
-    <barracudapff.com.androidtestbar.list.AnimatedExpandableListView
-        android:id="@+id/exListView"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@drawable/divider"
-        android:dividerHeight="7dp"
-        android:childDivider="@drawable/divider_child"
-        android:groupIndicator="@null" />
+        android:text="Hello notification fragment" />
+
 </FrameLayout>

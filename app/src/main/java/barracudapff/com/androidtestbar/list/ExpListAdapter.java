@@ -4,7 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,6 +19,8 @@ import barracudapff.com.androidtestbar.list.extra.ChildItem;
 
 public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandableListAdapter {
     private LayoutInflater inflater;
+
+    private static boolean COUNT = false;
 
     private ArrayList<ArrayList<ChildItem>> mGroups;
     private ArrayList<String> mGroupsNames;
@@ -37,6 +43,11 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
     }
 
     @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+    }
+
+    @Override
     public View getRealChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         ChildHolder childHolder = null;
 
@@ -54,6 +65,27 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
             childHolder.images[1] = view.findViewById(R.id.photo_image);
             view = convertView.findViewById(R.id.incl3);
             childHolder.images[2] = view.findViewById(R.id.photo_image);
+
+            final LinearLayout layout1 = convertView.findViewById(R.id.layout_data);
+            final LinearLayout layout2 = convertView.findViewById(R.id.photoes);
+            CheckBox button = convertView.findViewById(R.id.radioButton);
+            ;
+            final CheckBox buttonCount = convertView.findViewById(R.id.count);
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println(buttonCount.isChecked());
+                    if (buttonCount.isChecked()) {
+                        layout1.setVisibility(View.VISIBLE);
+                        layout2.setVisibility(View.VISIBLE);
+                        buttonCount.setChecked(false);
+                    } else {
+                        layout1.setVisibility(View.GONE);
+                        layout2.setVisibility(View.GONE);
+                        buttonCount.setChecked(true);
+                    }
+                }
+            });
 
             convertView.setTag(childHolder);
         } else {
@@ -81,8 +113,8 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
     }
 
     @Override
-    public GroupItem getGroup(int groupPosition) {
-        return null;
+    public ArrayList<ChildItem> getGroup(int groupPosition) {
+        return mGroups.get(groupPosition);
     }
 
     @Override
@@ -102,6 +134,7 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
         if (convertView == null) {
             groupHolder = new GroupHolder();
             convertView = inflater.inflate(R.layout.group_view, null);
+            groupHolder.layout = (FrameLayout) convertView.findViewById(R.id.layout_group);
             groupHolder.title = (TextView) convertView.findViewById(R.id.textGroup);
             groupHolder.arrow = (ImageView) convertView.findViewById(R.id.imageView2);
 
@@ -109,10 +142,15 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
         } else {
             groupHolder = (GroupHolder) convertView.getTag();
         }
-        if (isExpanded)// ture is Expanded or false is not isExpanded
+        if (isExpanded) {// ture is Expanded or false is not isExpanded
+            groupHolder.layout.setBackgroundResource(R.color.groupChoose);
+            groupHolder.title.setTextAppearance(R.style.groupChoose);
             groupHolder.arrow.setImageResource(R.drawable.ic_arrow_up_black_24dp);
-        else
+        } else {
+            groupHolder.layout.setBackgroundResource(R.color.groupHeader);
+            groupHolder.title.setTextAppearance(R.style.groupHeader);
             groupHolder.arrow.setImageResource(R.drawable.ic_arrow_down_black_24dp);
+        }
 
         //TextView textGroup = (TextView) convertView.findViewById(R.id.textGroup);
         groupHolder.title.setText(mGroupsNames.get(groupPosition));
@@ -146,6 +184,7 @@ public class ExpListAdapter extends AnimatedExpandableListView.AnimatedExpandabl
     }
 
     private static class GroupHolder {
+        FrameLayout layout;
         TextView title;
         ImageView arrow;
     }

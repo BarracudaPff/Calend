@@ -6,21 +6,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import barracudapff.com.androidtestbar.R;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link AccountFragment.OnFragmentInteractionListener} interface
+ * {@link CalendarFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link AccountFragment#newInstance} factory method to
+ * Use the {@link CalendarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AccountFragment extends Fragment {
+public class CalendarFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,7 +29,7 @@ public class AccountFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AccountFragment() {
+    public CalendarFragment() {
         // Required empty public constructor
     }
 
@@ -42,11 +39,11 @@ public class AccountFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment AccountFragment.
+     * @return A new instance of fragment CalendarFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static AccountFragment newInstance(String param1, String param2) {
-        AccountFragment fragment = new AccountFragment();
+    public static CalendarFragment newInstance(String param1, String param2) {
+        CalendarFragment fragment = new CalendarFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -67,13 +64,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
-
-        String[] menuItems = {"deo", "dooooo", "est"};
-        ListView listView = view.findViewById(R.id.mainMenu);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, menuItems);
-        listView.setAdapter(adapter);
-        return view;
+        return inflater.inflate(R.layout.fragment_calendar, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -82,17 +73,6 @@ public class AccountFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-
-    /*@Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }*/
 
     @Override
     public void onDetach() {

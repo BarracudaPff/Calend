@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">AndroidTestBar</string>
-    <string name="nav_home">Home</string>
+    <string name="nav_home">Расписание</string>
     <string name="nav_notif">Notification</string>
-    <string name="nav_account">Account</string>
+    <string name="nav_account">Задачи</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tasks">Задачи</string>
+
+    <string-array name="planets_array">
+        <item>Текущие задачи</item>
+        <item>Помеченные</item>
+        <item>Все задачи</item>
+        <item>Завершенные</item>
+        <item>Архив</item>
+    </string-array>
 </resources>
